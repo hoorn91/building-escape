@@ -41,13 +41,14 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     // Poll the Trigger Volume
-    // If the Actor that opens is in the volume
+    // If the Actor that opens is in the volume then open the door
     if (PressurePlate->IsOverlappingActor(ActorThatOpens))
     {
         OpenDoor();
         TimeDoorLastOpened = GetWorld()->GetTimeSeconds();
     }
     
+	// If the door has been opened for the amount of time specified in DoorCloseDelay then shut the door again
     if ((TimeDoorLastOpened > 0.0f) && (GetWorld()->GetTimeSeconds() - TimeDoorLastOpened) >= DoorCloseDelay)
     {
         CloseDoor();
