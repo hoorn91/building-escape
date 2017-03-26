@@ -26,4 +26,22 @@ public:
 private:
 	// How far can the player reach
 	float Reach = 100.0f;
+	// Set to true if you want to start loggin
+	const bool DEBUG = false;
+	// Player
+	APlayerController* Player;
+
+    UPhysicsHandleComponent* PhysicsHandle = nullptr;
+    UInputComponent* InputComponent = nullptr;
+    
+    void FindPhysicsHandleComponent();
+    void SetupInputComponent();
+    //Ray-cast and grab what's in reach
+    void Grab();
+
+    // Called when grab is released
+    void Release();
+
+    // Return hit for first physics body in reach
+    const FHitResult GetFirstPhysicsBodyInReach();
 };
